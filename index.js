@@ -24,9 +24,16 @@ async function run() {
         const productsCollection = database.collection('products');
 
         //GET products API
-        app.get('/products', async (req, res) => {
+        app.get('/explore', async (req, res) => {
             const cursor = productsCollection.find({});
             const products = await cursor.toArray();
+            res.send(products);
+        })
+
+        //GET products API
+        app.get('/products', async (req, res) => {
+            const cursor = productsCollection.find({});
+            const products = await cursor.limit(6).toArray();
             res.send(products);
         })
     }
