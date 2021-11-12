@@ -22,6 +22,7 @@ async function run() {
 
         const database = client.db('camzone');
         const productsCollection = database.collection('products');
+        const ordersCollection = database.collection('orders');
 
         //GET products API
         app.get('/explore', async (req, res) => {
@@ -35,6 +36,17 @@ async function run() {
             const cursor = productsCollection.find({});
             const products = await cursor.limit(6).toArray();
             res.send(products);
+        })
+
+        //POST order API
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            console.log('Hit the post API', order);
+
+            const result = await ordersCollection.insertOne(order);
+            console.log(result);
+
+            res.json(result);
         })
     }
     finally {
