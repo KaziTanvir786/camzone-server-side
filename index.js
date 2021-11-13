@@ -23,6 +23,7 @@ async function run() {
         const database = client.db('camzone');
         const productsCollection = database.collection('products');
         const ordersCollection = database.collection('orders');
+        const reviewsCollection = database.collection('reviews');
 
         //GET products API
         app.get('/explore', async (req, res) => {
@@ -61,6 +62,17 @@ async function run() {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await ordersCollection.deleteOne(query);
+            res.json(result);
+        })
+
+        //POST review API
+        app.post('/reviews', async (req, res) => {
+            const review = req.body;
+            console.log('Hit the post API', review);
+
+            const result = await reviewsCollection.insertOne(review);
+            console.log(result);
+
             res.json(result);
         })
     }
