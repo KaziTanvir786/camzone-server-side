@@ -21,9 +21,18 @@ async function run() {
         await client.connect();
 
         const database = client.db('camzone');
+        const usersCollection = database.collection('users');
         const productsCollection = database.collection('products');
         const ordersCollection = database.collection('orders');
         const reviewsCollection = database.collection('reviews');
+
+        //POST users API
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            console.log('Hit the post API', user);
+            const result = await usersCollection.insertOne(user);
+            res.json(result);
+        })
 
         //GET products API
         app.get('/explore', async (req, res) => {
