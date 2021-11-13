@@ -104,6 +104,14 @@ async function run() {
             res.json(result);
         })
 
+        //POST product API
+        app.post('/products', async (req, res) => {
+            const product = req.body;
+            console.log('Hit the post API', product);
+            const result = await productsCollection.insertOne(product);
+            res.json(result);
+        })
+
         //GET reviews API
         app.get('/reviews', async (req, res) => {
             const cursor = reviewsCollection.find({});
