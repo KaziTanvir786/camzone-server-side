@@ -25,6 +25,7 @@ async function run() {
         const productsCollection = database.collection('products');
         const ordersCollection = database.collection('orders');
         const reviewsCollection = database.collection('reviews');
+        const comingSoonCollection = database.collection('coming-soon');
 
         //POST users API
         app.post('/users', async (req, res) => {
@@ -56,6 +57,13 @@ async function run() {
         //GET products API
         app.get('/explore', async (req, res) => {
             const cursor = productsCollection.find({});
+            const products = await cursor.toArray();
+            res.send(products);
+        })
+
+        //GET coming soon API
+        app.get('/coming-soon', async (req, res) => {
+            const cursor = comingSoonCollection.find({});
             const products = await cursor.toArray();
             res.send(products);
         })
