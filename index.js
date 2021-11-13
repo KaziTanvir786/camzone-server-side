@@ -41,6 +41,18 @@ async function run() {
             res.send(users);
         })
 
+        //GET single user API
+        app.get('/users/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await usersCollection.findOne(query);
+            let isAdmin = false;
+            if (user?.role === 'admin') {
+                isAdmin = true;
+            }
+            res.json({ admin: isAdmin });
+        })
+
         //GET products API
         app.get('/explore', async (req, res) => {
             const cursor = productsCollection.find({});
