@@ -132,14 +132,8 @@ async function run() {
         app.put('/orders/:id', async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) };
-            const options = { upsert: true };
-
-            const updateDoc = {
-                $set: {
-                    status: 'Confirmed'
-                },
-            };
-            const result = await ordersCollection.updateOne(filter, updateDoc, options);
+            const updateDoc = { $set: { status: "Confirmed" } };
+            const result = await ordersCollection.updateOne(filter, updateDoc);
             res.json(result);
         })
     }
