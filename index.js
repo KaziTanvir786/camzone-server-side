@@ -153,6 +153,14 @@ async function run() {
             const result = await ordersCollection.updateOne(filter, updateDoc, options);
             res.json(result);
         })
+
+        //DELETE product API
+        app.delete('/explore/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await productsCollection.deleteOne(query);
+            res.json(result);
+        })
     }
     finally {
         // await client.close();
