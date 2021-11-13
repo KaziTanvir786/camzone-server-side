@@ -34,6 +34,13 @@ async function run() {
             res.json(result);
         })
 
+        //GET users API
+        app.get('/users', async (req, res) => {
+            const cursor = usersCollection.find({});
+            const users = await cursor.toArray();
+            res.send(users);
+        })
+
         //GET products API
         app.get('/explore', async (req, res) => {
             const cursor = productsCollection.find({});
