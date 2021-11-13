@@ -131,9 +131,26 @@ async function run() {
         //UPDATE order API
         app.put('/orders/:id', async (req, res) => {
             const id = req.params.id;
+            const updatedOrder = req.body;
             const filter = { _id: ObjectId(id) };
-            const updateDoc = { $set: { status: "Confirmed" } };
-            const result = await ordersCollection.updateOne(filter, updateDoc);
+            const options = { upsert: true };
+
+            const updateDoc = {
+                $set: {
+                    status: 'Confirmed',
+                    user_name: updatedOrder.user_name,
+                    user_email: updatedOrder.user_email,
+                    user_phone: updatedOrder.user_phone,
+                    user_address: updatedOrder.user_address,
+                    order_id: updatedOrder.order_id,
+                    order_name: updatedOrder.order_name,
+                    order_category: updatedOrder.order_category,
+                    order_description: updatedOrder.order_description,
+                    order_img: updatedOrder.order_img,
+                    order_price: updatedOrder.order_price
+                },
+            };
+            const result = await ordersCollection.updateOne(filter, updateDoc, options);
             res.json(result);
         })
     }
