@@ -1,6 +1,6 @@
 # CAMZONE (Server Side)
 
-### [Client side code link](https://github.com/programming-hero-web-course-4/niche-website-client-side-KaziTanvir786)
+### [Client side code link](https://github.com/KaziTanvir786/camzone-client-side)
 
 This text documentation (given below) will allow to understand the projects overview and purposes.
 * This is the server side node based application, which is basically works as a backend of the client side
