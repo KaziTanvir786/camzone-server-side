@@ -187,6 +187,6 @@ app.get("/", (req, res) => {
   res.send("Running camzone server...");
 });
 
-// app.listen(port, () => {
-//     console.log('Running camzone server on port', port);
-// })
+app.listen(port, () => {
+  console.log("Running camzone server on port", port);
+});
