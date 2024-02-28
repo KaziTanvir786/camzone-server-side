@@ -190,3 +190,5 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log("Running camzone server on port", port);
 });
+
+app.use("/", express.static("/build"));
